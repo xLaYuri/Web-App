@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
+import NextDynamic from "next/dynamic" 
 import type { Viewport } from "next"
-import dynamic from "next/dynamic"
 import NextTopLoader from "nextjs-toploader"
 import { type ReactNode } from "react"
 // import { BungieFoundationBanner } from "~/components/overlays/BungieFoundationBanner"
@@ -23,8 +23,8 @@ import "./global.css"
 import { Header } from "./header/Header"
 import { HeaderContent } from "./header/HeaderContent"
 
-// Dynamic import for the dexie DB
-const DestinyManifestManager = dynamic(
+// Using the renamed import NextDynamic to avoid the conflict
+const DestinyManifestManager = NextDynamic(
     () => import("~/components/providers/DestinyManifestManager")
 )
 
