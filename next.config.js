@@ -2,10 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  // 1. Increase timeout to prevent the 60s crash you saw in the logs
+  staticPageGenerationTimeout: 300, 
   images: {
     domains: ["www.bungie.net", "cdn.discordapp.com"]
   },
-  // This tells Vercel: "Ignore the code police and just build the website!"
   eslint: {
     ignoreDuringBuilds: true,
   },
