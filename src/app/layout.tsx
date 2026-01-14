@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import type { Viewport } from "next"
 import dynamic from "next/dynamic"
 import NextTopLoader from "nextjs-toploader"
