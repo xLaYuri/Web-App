@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Tells Next.js to generate static HTML files
   reactStrictMode: true,
   swcMinify: true,
   staticPageGenerationTimeout: 300, 
