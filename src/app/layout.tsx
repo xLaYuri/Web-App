@@ -29,7 +29,7 @@ const DestinyManifestManager = NextDynamic(
 )
 
 export const preferredRegion = ["iad1"] // us-east-1
-export const runtime = "nodejs";
+export const runtime = "nodejs"
 export const fetchCache = "default-no-store"
 export const revalidate = false
 export const maxDuration = 10 // max lambda duration in seconds
