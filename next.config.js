@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export', // Tells Next.js to generate static HTML files
   reactStrictMode: true,
   swcMinify: true,
-  // 1. Increase timeout to prevent the 60s crash you saw in the logs
   staticPageGenerationTimeout: 300, 
   images: {
+    unoptimized: true, // Required for static export
     domains: ["www.bungie.net", "cdn.discordapp.com"]
   },
   eslint: {
