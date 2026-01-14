@@ -1,0 +1,62 @@
+.main {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+
+    position: relative;
+}
+
+.main section {
+    max-width: 100%;
+    display: flex;
+}
+
+.user-info {
+    flex: 1;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+@media only screen and (orientation: portrait) {
+    .user-info {
+        /* display: block; */
+        flex-direction: column;
+    }
+}
+
+.raids {
+    flex: 5;
+
+    flex-direction: column;
+}
+
+.mid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 1em;
+}
+
+.pinned-activity-loading {
+    flex: 3;
+    width: 100%;
+    min-height: 10vh;
+
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    height: 100px;
+
+    background-color: var(--modal-background);
+}
+
+@media only screen and (orientation: portrait) {
+    .mid {
+        flex-direction: column;
+    }
+}

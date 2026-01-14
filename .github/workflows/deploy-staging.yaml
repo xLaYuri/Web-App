@@ -1,0 +1,56 @@
+name: Deploy to Staging
+on:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+jobs:
+    deploy:
+        name: Deploy staging
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v1
+              with:
+                  bun-version: latest
+
+            - name: Download dependencies
+              run: |
+                  bun install --frozen-lockfile
+                  bun install -g vercel
+                  bun prisma generate
+
+            - name: Install Turso CLI
+              env:
+                  TURSO_INSTALL_SKIP_SIGNUP: true
+              run: |
+                  curl -sSfL https://get.tur.so/install.sh | bash
+                  echo "PATH=$PATH:/home/runner/.turso" >> $GITHUB_ENV
+
+            - name: Apply Database Migrations
+              env:
+                  TURSO_DATABASE_NAME: "staging"
+                  TURSO_API_TOKEN: ${{ secrets.TURSO_API_TOKEN }}
+              run: ./.github/scripts/turso-migrate.sh
+
+            - name: Deploy Project Artifacts to Vercel
+              run: echo "VERCEL_DEPLOYMENT_URL=$(vercel deploy --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
+
+            - name: Set Alias
+              run: vercel alias set $VERCEL_DEPLOYMENT_URL staging.raidhub.io --scope "raidhub" --token=${{ secrets.VERCEL_TOKEN }}
