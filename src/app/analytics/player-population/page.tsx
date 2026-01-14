@@ -1,5 +1,5 @@
 "use client"
-
+export const dynamic = 'force-dynamic';
 import { useLocale } from "~/components/providers/LocaleManager"
 import { useRaidHubPlayerPopulation } from "~/services/raidhub/useRaidHubPlayerPopulation"
 import { PopulationGraph } from "./PopulationGraph"
