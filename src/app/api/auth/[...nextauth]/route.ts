@@ -1,1 +1,1 @@
-export { GET, POST } from "~/lib/server/auth"
+export const runtime = "edge";
