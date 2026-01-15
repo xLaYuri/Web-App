@@ -2,6 +2,7 @@ import "server-only"
 
 import { createClient } from "@libsql/client"
 import { PrismaLibSQL } from "@prisma/adapter-libsql"
+// CRITICAL: Using the /edge version to support Cloudflare Workers/Pages
 import { PrismaClient } from "@prisma/client/edge"
 import { saferFetch } from "./saferFetch"
 
