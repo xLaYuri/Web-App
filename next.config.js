@@ -4,24 +4,25 @@ const nextConfig = {
   swcMinify: true,
   staticPageGenerationTimeout: 300, 
   images: {
-    unoptimized: true, // Required for static export
     domains: ["www.bungie.net", "cdn.discordapp.com"]
   },
-  eslint: {
-    ignoreDuringBuilds: true,
+  // This is the magic fix for "Module not found" errors
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        os: false,
+        path: false,
+        crypto: false,
+        tty: false,
+        process: false,
+      };
+    }
+    return config;
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  async redirects() {
-    return [
-      {
-        source: "/discord",
-        destination: "https://discord.gg/raidhub",
-        permanent: true
-      }
-    ]
-  }
-}
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
