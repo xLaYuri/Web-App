@@ -3,6 +3,6 @@ pages_build_output_dir = ".vercel/output/static"
 compatibility_date = "2024-01-14"
 compatibility_flags = ["nodejs_compat"]
 
-[pages_build_config]
-# This forces Cloudflare to use Bun instead of NPM
-build_command = "bun install && npx @cloudflare/next-on-pages@1"
+# Build variables must be defined here to skip NPM
+[vars]
+SKIP_DEPENDENCY_INSTALL = "true"
