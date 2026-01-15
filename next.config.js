@@ -6,7 +6,7 @@ const nextConfig = {
   images: {
     domains: ["www.bungie.net", "cdn.discordapp.com"]
   },
-  // This is the magic fix for "Module not found" errors
+  // Add child_process to this list
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.resolve.fallback = {
@@ -17,6 +17,7 @@ const nextConfig = {
         crypto: false,
         tty: false,
         process: false,
+        child_process: false, // This fixes the current error
       };
     }
     return config;
