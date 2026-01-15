@@ -2,7 +2,7 @@ import "server-only"
 
 import { createClient } from "@libsql/client"
 import { PrismaLibSQL } from "@prisma/adapter-libsql"
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client/edge"
 import { saferFetch } from "./saferFetch"
 
 export type PrismaClientWithExtensions = ReturnType<typeof createPrismaWithExtension>
