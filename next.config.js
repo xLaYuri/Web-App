@@ -6,18 +6,14 @@ const nextConfig = {
   images: {
     domains: ["www.bungie.net", "cdn.discordapp.com"]
   },
-  // Add child_process to this list
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
-        fs: false,
-        os: false,
-        path: false,
-        crypto: false,
-        tty: false,
-        process: false,
-        child_process: false, // This fixes the current error
+        // ONLY disable what nodejs_compat doesn't support
+        child_process: false,
+        net: false,
+        tls: false,
       };
     }
     return config;
