@@ -8,9 +8,15 @@ const nextConfig = {
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
+      // This tells Webpack to ignore Node-only modules during the Edge build
       config.resolve.fallback = {
         ...config.resolve.fallback,
-        // ONLY disable what nodejs_compat doesn't support
+        fs: false,
+        os: false,
+        path: false,
+        crypto: false,
+        tty: false,
+        process: false,
         child_process: false,
         net: false,
         tls: false,
